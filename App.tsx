@@ -6,7 +6,7 @@ import AwwwardsJourney from './components/AwwwardsJourney';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // Defined before usage to prevent hoisting issues
-function PageTransition({ children }: { children: React.ReactNode }) {
+const PageTransition: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -18,7 +18,7 @@ function PageTransition({ children }: { children: React.ReactNode }) {
       {children}
     </motion.div>
   );
-}
+};
 
 // Wrapper for animated route transitions
 const AnimatedRoutes = () => {

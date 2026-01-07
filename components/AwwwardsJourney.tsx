@@ -6,8 +6,8 @@ import { motion, useScroll, useTransform, useSpring, useMotionValue, MotionValue
 const ANIM_TRANSITION = { duration: 1.2, ease: [0.16, 1, 0.3, 1] };
 
 // Text Splitting for "Word-by-word reveal"
-const SplitText = ({ children, className = "", delay = 0 }: { children: string, className?: string, delay?: number }) => {
-  const words = children.split(" ");
+const SplitText = ({ text, className = "", delay = 0 }: { text: string, className?: string, delay?: number }) => {
+  const words = text.split(" ");
   return (
     <span className={`inline-flex flex-wrap overflow-hidden ${className}`}>
       {words.map((word, i) => (
@@ -28,7 +28,7 @@ const SplitText = ({ children, className = "", delay = 0 }: { children: string, 
 };
 
 // Magnetic Cursor Button
-const MagneticButton = ({ children, className = "" }: { children: React.ReactNode, className?: string }) => {
+const MagneticButton: React.FC<React.PropsWithChildren<{ className?: string }>> = ({ children, className = "" }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -89,12 +89,12 @@ const Hero = () => {
     <section className="min-h-screen flex flex-col justify-center px-6 md:px-20 pt-20 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[40vw] h-[60vh] bg-[#E8E6D9] rounded-bl-full opacity-50 blur-3xl -z-10" />
       <h1 className="text-[12vw] leading-[0.85] font-bold tracking-tighter text-[#1A1A1A] mix-blend-multiply uppercase">
-        <SplitText>Digital</SplitText> <br />
-        <SplitText delay={0.1}>Alchemy</SplitText>
+        <SplitText text="Digital" /> <br />
+        <SplitText text="Alchemy" delay={0.1} />
       </h1>
       <div className="flex justify-between items-end mt-20">
         <p className="max-w-md text-lg text-[#4A4A4A] font-medium leading-relaxed">
-          <SplitText delay={0.3}>Crafting digital experiences that feel organic, fluid, and inevitably alive.</SplitText>
+          <SplitText text="Crafting digital experiences that feel organic, fluid, and inevitably alive." delay={0.3} />
         </p>
         <MagneticButton className="hidden md:flex w-32 h-32 rounded-full border border-[#1A1A1A] items-center justify-center hover:bg-[#1A1A1A] hover:text-white transition-colors duration-300 group">
           <span className="group-hover:rotate-45 transition-transform duration-300">Scroll</span>
@@ -110,9 +110,7 @@ const Manifesto = () => {
     <section className="py-40 px-6 md:px-20 bg-[#FDFCF8]">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-6xl font-serif leading-tight text-[#1A1A1A]">
-          <SplitText>
-            We reject the static. If it doesn't move, it's broken. We believe in the physics of emotion and the architecture of awe.
-          </SplitText>
+          <SplitText text="We reject the static. If it doesn't move, it's broken. We believe in the physics of emotion and the architecture of awe." />
         </h2>
       </div>
     </section>
