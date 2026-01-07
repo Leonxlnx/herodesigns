@@ -2,16 +2,24 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GlassCard } from './ui/GlassCard';
 import { motion } from 'framer-motion';
-import { ArrowRight, LayoutTemplate, Star, Zap } from 'lucide-react';
+import { ArrowRight, LayoutTemplate, Star, Zap, Layers } from 'lucide-react';
 
 const templates = [
   {
     id: 'flowly',
-    title: 'Flowly SaaS Hero',
-    description: 'Dark mode, glassmorphism, 3D tilt effects. High fidelity reproduction.',
-    tags: ['SaaS', 'Dark Mode', 'Glass'],
+    title: 'Flowly Tech Hero',
+    description: 'Dark mode, blue tech aesthetics, 3D tilt interface. High fidelity SaaS reproduction.',
+    tags: ['SaaS', 'Tech', 'Blue'],
     gradient: 'from-blue-900 to-slate-900',
     status: 'LIVE'
+  },
+  {
+    id: 'flowly-warm',
+    title: 'Flowly Warm Hero',
+    description: 'Luxury wood & gold aesthetic with centered layout and floating glass elements.',
+    tags: ['Luxury', 'Warm', 'Gold'],
+    gradient: 'from-amber-900 to-stone-900',
+    status: 'NEW'
   },
   {
     id: 'awwwards',
@@ -19,15 +27,7 @@ const templates = [
     description: '12-section vertical odyssey. Hyper-motion, parallax, and luxury aesthetics.',
     tags: ['Motion', 'Luxury', 'Scroll'],
     gradient: 'from-orange-900 to-stone-900',
-    status: 'NEW'
-  },
-  {
-    id: 'coming-soon-2',
-    title: 'E-commerce Header',
-    description: 'Coming soon. Modern shopping experience.',
-    tags: ['Shop', 'Light'],
-    gradient: 'from-purple-900 to-slate-900',
-    status: 'SOON'
+    status: 'LIVE'
   }
 ];
 
@@ -85,7 +85,9 @@ const CollectorDashboard: React.FC = () => {
               <div className="p-8 h-full flex flex-col">
                 <div className="flex justify-between items-start mb-6">
                   <div className="p-3 bg-white/10 rounded-xl backdrop-blur-sm">
-                    {template.id === 'awwwards' ? <Zap size={24} /> : <LayoutTemplate size={24} />}
+                    {template.id === 'awwwards' ? <Zap size={24} /> : 
+                     template.id === 'flowly' ? <Layers size={24} /> :
+                     <LayoutTemplate size={24} />}
                   </div>
                   <div className={`px-3 py-1 text-xs font-bold rounded-full border ${
                     template.status === 'LIVE' ? 'bg-green-500/20 text-green-300 border-green-500/20' :
