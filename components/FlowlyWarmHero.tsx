@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { Play, ArrowRight, LayoutGrid, BarChart3, Wallet, MessageSquare, CheckCircle2, User } from 'lucide-react';
+import { Play, ArrowRight, LayoutGrid, BarChart3, Wallet, MessageSquare, CheckCircle2, User, ArrowLeft } from 'lucide-react';
 import { GlassCard } from './ui/GlassCard';
+import { useNavigate } from 'react-router-dom';
 
 const FlowlyWarmHero: React.FC = () => {
+  const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
   
   // Mouse parallax for floating elements
@@ -31,7 +33,17 @@ const FlowlyWarmHero: React.FC = () => {
       className="relative w-full h-screen bg-[#1a1510] text-white overflow-hidden font-sans selection:bg-orange-500/30 flex flex-col"
       onMouseMove={handleMouseMove}
     >
-      
+      {/* Back Button */}
+      <motion.button 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        onClick={() => navigate('/')}
+        className="fixed top-6 left-6 z-[60] p-2 rounded-full bg-[#1a1510]/50 border border-[#e8dac0]/10 text-[#e8dac0]/50 hover:text-[#e8dac0] hover:bg-[#1a1510]/80 transition-all"
+      >
+        <ArrowLeft size={20} />
+      </motion.button>
+
       {/* --- BACKGROUND --- */}
       <div className="absolute inset-0 z-0">
         {/* Base Image with heavy blur/overlay */}
@@ -50,7 +62,7 @@ const FlowlyWarmHero: React.FC = () => {
 
       {/* --- NAVIGATION --- */}
       <nav className="relative z-50 w-full px-8 py-8 flex items-center justify-between max-w-7xl mx-auto">
-        <div className="flex items-center gap-2 text-[#e8dac0]">
+        <div className="flex items-center gap-2 text-[#e8dac0] ml-12 md:ml-0">
           <LayoutGrid size={24} className="text-orange-300" />
           <span className="text-xl font-bold tracking-tight">flowly</span>
         </div>

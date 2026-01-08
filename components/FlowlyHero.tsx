@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Play, ArrowRight, Layers, CheckCircle2, MessageSquare, Zap, Clock, Users, Plus, Search, Bell, Menu } from 'lucide-react';
+import { Play, ArrowRight, Layers, CheckCircle2, MessageSquare, Zap, Clock, Users, Plus, Search, Bell, Menu, ArrowLeft } from 'lucide-react';
 import { GlassCard } from './ui/GlassCard';
+import { useNavigate } from 'react-router-dom';
 
 const FlowlyHero: React.FC = () => {
+  const navigate = useNavigate();
   // Mouse position for parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -26,7 +28,17 @@ const FlowlyHero: React.FC = () => {
       className="relative w-full h-screen bg-[#02040a] text-white overflow-hidden font-sans selection:bg-indigo-500/30 flex flex-col"
       onMouseMove={handleMouseMove}
     >
-      
+      {/* Back Button */}
+      <motion.button 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+        onClick={() => navigate('/')}
+        className="fixed top-6 left-6 z-[60] p-2 rounded-full bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 transition-all"
+      >
+        <ArrowLeft size={20} />
+      </motion.button>
+
       {/* --- AMBIENT BACKGROUND --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         {/* Main glow spots */}
@@ -47,7 +59,7 @@ const FlowlyHero: React.FC = () => {
 
       {/* --- NAVIGATION --- */}
       <nav className="relative z-50 w-full px-8 py-6 flex items-center justify-between max-w-[1600px] mx-auto">
-        <div className="flex items-center gap-3 cursor-pointer">
+        <div className="flex items-center gap-3 cursor-pointer ml-12 md:ml-0">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-b from-blue-500 to-blue-700 shadow-lg shadow-blue-900/40 flex items-center justify-center text-white relative overflow-hidden group">
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             <Layers size={18} strokeWidth={2.5} />

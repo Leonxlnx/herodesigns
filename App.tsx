@@ -3,7 +3,6 @@ import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import FlowlyHero from './components/FlowlyHero';
 import FlowlyWarmHero from './components/FlowlyWarmHero';
 import CollectorDashboard from './components/CollectorDashboard';
-import AwwwardsJourney from './components/AwwwardsJourney';
 import { AnimatePresence, motion } from 'framer-motion';
 
 // Defined before usage to prevent hoisting issues
@@ -49,14 +48,6 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <FlowlyWarmHero />
-            </PageTransition>
-          } 
-        />
-        <Route 
-          path="/template/awwwards" 
-          element={
-            <PageTransition>
-              <AwwwardsJourney />
             </PageTransition>
           } 
         />
