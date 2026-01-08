@@ -59,7 +59,7 @@ const AnimatedRoutes = () => {
 const App: React.FC = () => {
   return (
     <HashRouter>
-      <div className="antialiased text-slate-900 dark:text-slate-50">
+      <div className="antialiased text-slate-900 dark:text-slate-50 bg-[#050505]">
         <AnimatedRoutes />
       </div>
     </HashRouter>

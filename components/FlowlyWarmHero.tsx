@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
-import { Play, ArrowRight, LayoutGrid, BarChart3, Wallet, MessageSquare, CheckCircle2, User, ArrowLeft } from 'lucide-react';
+import { Play, ArrowRight, LayoutGrid, BarChart3, Wallet, CheckCircle2, User, ArrowLeft } from 'lucide-react';
 import { GlassCard } from './ui/GlassCard';
 import { useNavigate } from 'react-router-dom';
 
@@ -33,36 +33,47 @@ const FlowlyWarmHero: React.FC = () => {
       className="relative w-full h-screen bg-[#1a1510] text-white overflow-hidden font-sans selection:bg-orange-500/30 flex flex-col"
       onMouseMove={handleMouseMove}
     >
+      {/* Intro Curtain */}
+      <motion.div 
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="absolute inset-0 bg-black z-[100] pointer-events-none"
+      />
+
       {/* Back Button */}
       <motion.button 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1, duration: 0.5 }}
         onClick={() => navigate('/')}
-        className="fixed top-6 left-6 z-[60] p-2 rounded-full bg-[#1a1510]/50 border border-[#e8dac0]/10 text-[#e8dac0]/50 hover:text-[#e8dac0] hover:bg-[#1a1510]/80 transition-all"
+        className="fixed top-8 left-8 z-[60] group flex items-center gap-2 px-4 py-2 rounded-full bg-[#1a1510]/50 border border-[#e8dac0]/10 text-[#e8dac0]/50 hover:text-[#e8dac0] hover:bg-[#1a1510]/80 transition-all cursor-pointer backdrop-blur-md"
       >
-        <ArrowLeft size={20} />
+        <ArrowLeft size={14} />
+        <span className="text-xs font-medium uppercase tracking-wider">Back</span>
       </motion.button>
 
       {/* --- BACKGROUND --- */}
       <div className="absolute inset-0 z-0">
-        {/* Base Image with heavy blur/overlay */}
         <div 
             className="absolute inset-0 bg-cover bg-center opacity-40 scale-110"
             style={{ backgroundImage: `url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2560&auto=format&fit=crop')` }}
         />
-        {/* Gradient Overlay to darken and warm it up */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#1a1510]/80 via-[#1a1510]/50 to-[#1a1510] mix-blend-multiply" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#1a1510] via-transparent to-[#1a1510]" />
         
-        {/* Warm Ambient Glows */}
         <div className="absolute top-[20%] left-[20%] w-[30vw] h-[30vw] bg-orange-500/10 rounded-full blur-[100px]" />
         <div className="absolute top-[30%] right-[20%] w-[25vw] h-[25vw] bg-amber-500/10 rounded-full blur-[100px]" />
       </div>
 
       {/* --- NAVIGATION --- */}
-      <nav className="relative z-50 w-full px-8 py-8 flex items-center justify-between max-w-7xl mx-auto">
-        <div className="flex items-center gap-2 text-[#e8dac0] ml-12 md:ml-0">
+      <motion.nav 
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="relative z-50 w-full px-8 py-8 flex items-center justify-between max-w-7xl mx-auto"
+      >
+        <div className="flex items-center gap-2 text-[#e8dac0] ml-24 md:ml-0">
           <LayoutGrid size={24} className="text-orange-300" />
           <span className="text-xl font-bold tracking-tight">flowly</span>
         </div>
@@ -79,16 +90,15 @@ const FlowlyWarmHero: React.FC = () => {
             Get Started
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* --- HERO CONTENT --- */}
       <main className="flex-1 relative z-10 w-full max-w-7xl mx-auto flex flex-col items-center justify-center text-center px-4">
         
-        {/* Typography */}
         <motion.div 
            initial={{ opacity: 0, y: 30 }}
            animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.8 }}
+           transition={{ duration: 0.8, delay: 0.6 }}
            className="relative z-20 max-w-4xl mx-auto space-y-6"
         >
            <h1 className="text-6xl md:text-8xl font-medium tracking-tight text-[#f5f0e6] drop-shadow-2xl">
@@ -113,10 +123,15 @@ const FlowlyWarmHero: React.FC = () => {
         </motion.div>
 
         {/* --- FLOATING ELEMENTS --- */}
-        {/* We absolutely position these around the center content */}
         
         {/* Left Side Group */}
-        <motion.div style={useParallax(1)} className="absolute left-[5%] top-[25%] hidden xl:block">
+        <motion.div 
+            style={useParallax(1)} 
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="absolute left-[5%] top-[25%] hidden xl:block"
+        >
            <GlassCard className="p-4 w-64 bg-[#2a241c]/40 !border-[#e8dac0]/10 !rounded-xl">
               <div className="flex gap-3 mb-3">
                  <div className="w-8 h-8 rounded-full bg-orange-500/20 flex items-center justify-center text-orange-300">
@@ -135,7 +150,13 @@ const FlowlyWarmHero: React.FC = () => {
            </GlassCard>
         </motion.div>
 
-        <motion.div style={useParallax(0.5)} className="absolute left-[10%] bottom-[20%] hidden lg:block">
+        <motion.div 
+            style={useParallax(0.5)} 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.9 }}
+            className="absolute left-[10%] bottom-[20%] hidden lg:block"
+        >
            <GlassCard className="p-5 w-72 bg-[#2a241c]/60 !border-[#e8dac0]/10 !rounded-2xl">
               <div className="flex items-center justify-between mb-4 border-b border-[#e8dac0]/5 pb-2">
                  <span className="text-xs font-semibold text-[#e8dac0]/60 uppercase tracking-widest">Tasks</span>
@@ -156,7 +177,13 @@ const FlowlyWarmHero: React.FC = () => {
         </motion.div>
 
          {/* Small Pill Left */}
-        <motion.div style={useParallax(1.5)} className="absolute left-[2%] top-[50%] hidden 2xl:block">
+        <motion.div 
+            style={useParallax(1.5)} 
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 0.6, delay: 1 }}
+            className="absolute left-[2%] top-[50%] hidden 2xl:block"
+        >
             <GlassCard className="flex items-center gap-2 px-3 py-2 !rounded-full bg-[#2a241c]/80 !border-[#e8dac0]/20">
                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                <span className="text-xs font-medium text-[#e8dac0]">System Online</span>
@@ -164,7 +191,13 @@ const FlowlyWarmHero: React.FC = () => {
         </motion.div>
 
         {/* Right Side Group */}
-        <motion.div style={useParallax(-1)} className="absolute right-[5%] top-[20%] hidden xl:block">
+        <motion.div 
+            style={useParallax(-1)} 
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="absolute right-[5%] top-[20%] hidden xl:block"
+        >
            <GlassCard className="p-4 w-64 bg-[#2a241c]/40 !border-[#e8dac0]/10 !rounded-xl">
               <div className="flex justify-between items-end mb-4">
                  <div className="flex flex-col">
@@ -181,7 +214,13 @@ const FlowlyWarmHero: React.FC = () => {
            </GlassCard>
         </motion.div>
 
-        <motion.div style={useParallax(-0.5)} className="absolute right-[12%] bottom-[25%] hidden lg:block">
+        <motion.div 
+            style={useParallax(-0.5)} 
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.9 }}
+            className="absolute right-[12%] bottom-[25%] hidden lg:block"
+        >
            <GlassCard className="p-0 w-80 bg-[#2a241c]/60 !border-[#e8dac0]/10 !rounded-2xl overflow-hidden">
               <div className="p-4 bg-gradient-to-br from-neutral-800 to-neutral-900 border-b border-[#e8dac0]/5">
                  <div className="flex justify-between items-start">
@@ -199,18 +238,6 @@ const FlowlyWarmHero: React.FC = () => {
               </div>
            </GlassCard>
         </motion.div>
-
-        {/* Tiny Avatar Right */}
-        <motion.div style={useParallax(-1.2)} className="absolute right-[4%] top-[60%] hidden 2xl:block">
-           <GlassCard className="p-1 pr-3 flex items-center gap-2 !rounded-full bg-[#2a241c]/80 !border-[#e8dac0]/20">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-200 to-orange-100" />
-              <div className="flex flex-col leading-none">
-                 <span className="text-[10px] text-[#e8dac0]/60">Design</span>
-                 <span className="text-xs font-bold text-[#e8dac0]">Team</span>
-              </div>
-           </GlassCard>
-        </motion.div>
-
       </main>
     </div>
   );

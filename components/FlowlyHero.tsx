@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Play, ArrowRight, Layers, CheckCircle2, MessageSquare, Zap, Clock, Users, Plus, Search, Bell, Menu, ArrowLeft } from 'lucide-react';
+import { Play, ArrowRight, Layers, MessageSquare, Zap, Users, Plus, Search, Bell, Menu, ArrowLeft } from 'lucide-react';
 import { GlassCard } from './ui/GlassCard';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,6 @@ const FlowlyHero: React.FC = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Smooth springs for rotation
   const springConfig = { damping: 30, stiffness: 200 };
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [4, -4]), springConfig);
   const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-4, 4]), springConfig);
@@ -28,26 +27,31 @@ const FlowlyHero: React.FC = () => {
       className="relative w-full h-screen bg-[#02040a] text-white overflow-hidden font-sans selection:bg-indigo-500/30 flex flex-col"
       onMouseMove={handleMouseMove}
     >
+      {/* Intro Curtain */}
+      <motion.div 
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="absolute inset-0 bg-black z-[100] pointer-events-none"
+      />
+
       {/* Back Button */}
       <motion.button 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1, duration: 0.5 }}
         onClick={() => navigate('/')}
-        className="fixed top-6 left-6 z-[60] p-2 rounded-full bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 transition-all"
+        className="fixed top-8 left-8 z-[60] group flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 border border-white/10 backdrop-blur-md text-white/50 hover:text-white hover:border-white/30 transition-all cursor-pointer"
       >
-        <ArrowLeft size={20} />
+        <ArrowLeft size={14} />
+        <span className="text-xs font-medium uppercase tracking-wider">Back</span>
       </motion.button>
 
       {/* --- AMBIENT BACKGROUND --- */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        {/* Main glow spots */}
         <div className="absolute top-[-10%] left-[20%] w-[60vw] h-[60vw] bg-blue-900/10 rounded-full blur-[150px] mix-blend-screen animate-pulse duration-[10s]" />
         <div className="absolute bottom-[-10%] right-[-5%] w-[40vw] h-[40vw] bg-indigo-900/10 rounded-full blur-[120px] mix-blend-screen" />
-        
-        {/* Grid Floor */}
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03]" />
-        <div className="absolute bottom-0 w-full h-[40vh] bg-gradient-to-t from-[#02040a] to-transparent z-10" />
         <div className="absolute bottom-0 w-full h-[60vh] opacity-20 perspective-[1000px] transform-style-3d overflow-hidden">
            <div className="absolute inset-0 w-[200%] -ml-[50%] h-full grid grid-cols-[repeat(40,1fr)] grid-rows-[repeat(20,1fr)] transform rotate-x-[60deg]">
               {Array.from({ length: 800 }).map((_, i) => (
@@ -58,10 +62,14 @@ const FlowlyHero: React.FC = () => {
       </div>
 
       {/* --- NAVIGATION --- */}
-      <nav className="relative z-50 w-full px-8 py-6 flex items-center justify-between max-w-[1600px] mx-auto">
-        <div className="flex items-center gap-3 cursor-pointer ml-12 md:ml-0">
+      <motion.nav 
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="relative z-50 w-full px-8 py-6 flex items-center justify-between max-w-[1600px] mx-auto"
+      >
+        <div className="flex items-center gap-3 cursor-pointer ml-24 md:ml-0">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-b from-blue-500 to-blue-700 shadow-lg shadow-blue-900/40 flex items-center justify-center text-white relative overflow-hidden group">
-            <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
             <Layers size={18} strokeWidth={2.5} />
           </div>
           <span className="text-xl font-bold tracking-tight text-white/90">flowly</span>
@@ -81,7 +89,7 @@ const FlowlyHero: React.FC = () => {
             Get Started
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* --- HERO CONTENT --- */}
       <main className="flex-1 relative z-10 w-full max-w-[1600px] mx-auto px-8 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-12 lg:gap-0">
@@ -91,7 +99,7 @@ const FlowlyHero: React.FC = () => {
            <motion.div 
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.6 }}
+             transition={{ duration: 0.6, delay: 0.6 }}
              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-900/20 border border-blue-500/20 text-blue-300 text-xs font-semibold tracking-wide uppercase"
            >
              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
@@ -99,9 +107,9 @@ const FlowlyHero: React.FC = () => {
            </motion.div>
 
            <motion.h1 
-             initial={{ opacity: 0, y: 20 }}
+             initial={{ opacity: 0, y: 30 }}
              animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.6, delay: 0.1 }}
+             transition={{ duration: 0.8, delay: 0.7 }}
              className="text-5xl lg:text-7xl font-bold tracking-tighter leading-[1.05] text-white"
            >
              Orchestrate your <br/>
@@ -113,7 +121,7 @@ const FlowlyHero: React.FC = () => {
            <motion.p 
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.6, delay: 0.2 }}
+             transition={{ duration: 0.8, delay: 0.8 }}
              className="text-lg text-gray-400 leading-relaxed max-w-lg"
            >
              The operating system for high-performance product teams. 
@@ -123,7 +131,7 @@ const FlowlyHero: React.FC = () => {
            <motion.div 
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.6, delay: 0.3 }}
+             transition={{ duration: 0.8, delay: 0.9 }}
              className="flex items-center gap-4"
            >
              <button className="group relative px-8 py-4 bg-white text-black rounded-xl font-bold text-sm shadow-[0_0_40px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_0_60px_-15px_rgba(255,255,255,0.4)] transition-all overflow-hidden">
@@ -136,18 +144,6 @@ const FlowlyHero: React.FC = () => {
                 <Play size={16} className="fill-current" /> How it works
              </button>
            </motion.div>
-
-           <motion.div 
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             transition={{ duration: 1, delay: 0.8 }}
-             className="flex items-center gap-6 pt-4 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
-           >
-              {/* Fake Logos */}
-              {['ACME Corp', 'GlobalBank', 'Starlight'].map((logo, i) => (
-                <div key={i} className="text-xs font-bold text-white/40 uppercase tracking-widest">{logo}</div>
-              ))}
-           </motion.div>
         </div>
 
         {/* RIGHT COLUMN: 3D INTERFACE */}
@@ -155,6 +151,9 @@ const FlowlyHero: React.FC = () => {
           <motion.div 
             className="relative w-[650px] h-[450px]"
             style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+            initial={{ opacity: 0, scale: 0.9, rotateX: 10 }}
+            animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+            transition={{ duration: 1.2, delay: 0.5, ease: "easeOut" }}
           >
              {/* --- MAIN DASHBOARD WINDOW --- */}
              <GlassCard className="w-full h-full !rounded-xl !border-white/10 !bg-[#0f1115]/90 flex flex-col shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)]">
@@ -233,7 +232,7 @@ const FlowlyHero: React.FC = () => {
                className="absolute -right-12 top-20 w-64 z-20"
                initial={{ x: 40, opacity: 0 }}
                animate={{ x: 0, opacity: 1 }}
-               transition={{ delay: 0.5, duration: 0.8 }}
+               transition={{ delay: 1, duration: 0.8 }}
                style={{ transform: "translateZ(40px)" }}
              >
                 <GlassCard className="p-4 bg-[#1e2029]/80 !border-white/10 !rounded-xl backdrop-blur-xl">
@@ -264,7 +263,7 @@ const FlowlyHero: React.FC = () => {
                className="absolute -left-16 bottom-32 w-48 z-30"
                initial={{ x: -40, opacity: 0 }}
                animate={{ x: 0, opacity: 1 }}
-               transition={{ delay: 0.7, duration: 0.8 }}
+               transition={{ delay: 1.2, duration: 0.8 }}
                style={{ transform: "translateZ(60px)" }}
              >
                 <GlassCard className="p-4 bg-[#111318]/90 !border-green-500/20 !rounded-xl">
@@ -282,35 +281,12 @@ const FlowlyHero: React.FC = () => {
                       <motion.div 
                         initial={{ width: 0 }}
                         animate={{ width: "75%" }}
-                        transition={{ duration: 1.5, delay: 1 }}
+                        transition={{ duration: 1.5, delay: 1.5 }}
                         className="h-full bg-green-500" 
                       />
                    </div>
                 </GlassCard>
              </motion.div>
-
-             {/* --- FLOATING WIDGET 3: ACTIVE USERS --- */}
-             <motion.div 
-               className="absolute -bottom-8 right-8 z-40"
-               initial={{ y: 40, opacity: 0 }}
-               animate={{ y: 0, opacity: 1 }}
-               transition={{ delay: 0.9, duration: 0.8 }}
-               style={{ transform: "translateZ(80px)" }}
-             >
-                <GlassCard className="px-4 py-3 flex items-center gap-3 bg-[#1a1d24]/90 !rounded-full !border-white/10">
-                   <div className="flex -space-x-2">
-                      {[1,2,3].map(i => (
-                         <div key={i} className="w-6 h-6 rounded-full bg-gray-700 border border-[#1a1d24]" />
-                      ))}
-                   </div>
-                   <div className="w-px h-4 bg-white/10" />
-                   <div className="flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                      <span className="text-xs font-semibold text-white">124 Online</span>
-                   </div>
-                </GlassCard>
-             </motion.div>
-
           </motion.div>
         </div>
       </main>
