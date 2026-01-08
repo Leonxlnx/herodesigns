@@ -2,6 +2,7 @@ import React from 'react';
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import FlowlyHero from './components/FlowlyHero';
 import FlowlyWarmHero from './components/FlowlyWarmHero';
+import NeoHero from './components/NeoHero';
 import CollectorDashboard from './components/CollectorDashboard';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -48,6 +49,14 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <FlowlyWarmHero />
+            </PageTransition>
+          } 
+        />
+        <Route 
+          path="/template/neo" 
+          element={
+            <PageTransition>
+              <NeoHero />
             </PageTransition>
           } 
         />

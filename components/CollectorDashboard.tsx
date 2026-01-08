@@ -70,12 +70,31 @@ const ThumbnailFlowlyWarm = () => (
   </div>
 );
 
-const ThumbnailFuture = () => (
-   <div className="relative w-full h-full bg-[#080808] flex items-center justify-center">
+const ThumbnailNeo = () => (
+   <div className="relative w-full h-full bg-[#09090b] flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
       <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.05]" />
-      <div className="z-10 flex flex-col items-center gap-2 opacity-30 group-hover:opacity-50 transition-opacity">
-         <Lock size={24} className="text-white" />
-         <span className="text-[10px] uppercase tracking-[0.2em] text-white font-medium">Locked</span>
+      
+      {/* Bento Grid Mini */}
+      <div className="grid grid-cols-4 grid-rows-3 gap-1.5 w-48 h-32 opacity-80 group-hover:opacity-100 transition-opacity">
+         {/* Large Item */}
+         <div className="col-span-2 row-span-2 bg-[#18181b] rounded border border-white/10 relative overflow-hidden">
+            <div className="absolute inset-0 bg-purple-500/10" />
+            <div className="absolute bottom-2 left-2 w-8 h-1 bg-white/20 rounded-full" />
+         </div>
+         {/* Small Items */}
+         <div className="col-span-1 row-span-1 bg-[#27272a] rounded border border-white/10" />
+         <div className="col-span-1 row-span-1 bg-purple-600 rounded border border-white/10" />
+         
+         {/* Med Items */}
+         <div className="col-span-1 row-span-2 bg-[#18181b] rounded border border-white/10 flex flex-col gap-1 p-1">
+             {[1,2,3].map(i => <div key={i} className="w-full h-1 bg-white/10 rounded-full" />)}
+         </div>
+         <div className="col-span-1 row-span-1 bg-[#18181b] rounded border border-white/10" />
+         
+         {/* Wide Item */}
+         <div className="col-span-2 row-span-1 bg-[#1c1c21] rounded border border-white/10 flex items-center justify-center">
+             <div className="w-16 h-1.5 bg-white/10 rounded-full" />
+         </div>
       </div>
    </div>
 );
@@ -98,11 +117,11 @@ const items = [
     status: 'Ready'
   },
   {
-    id: 'future',
+    id: 'neo',
     title: 'Neo Portfolio',
     description: 'Bento / Grid',
-    thumbnail: <ThumbnailFuture />,
-    status: 'Locked'
+    thumbnail: <ThumbnailNeo />,
+    status: 'Ready'
   }
 ];
 
