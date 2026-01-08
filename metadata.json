@@ -1,5 +1,5 @@
 {
-  "name": "Flowly Collector",
-  "description": "A professional website section collector featuring a high-fidelity reproduction of the Flowly hero section with advanced motion and glassmorphism effects.",
+  "name": "Hero Designs",
+  "description": "A curated library of high-fidelity, professional website hero sections built with React, Tailwind CSS, and Framer Motion. Featuring advanced 3D motion, glassmorphism, and responsive layouts.",
   "requestFramePermissions": []
 }
