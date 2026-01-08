@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Zap, LayoutGrid, Lock } from 'lucide-react';
+import { ArrowUpRight, Lock } from 'lucide-react';
 
 // --- VISUAL ASSETS (CSS ART) ---
 
@@ -37,10 +37,6 @@ const ThumbnailFlowlyTech = () => (
                   </div>
                ))}
             </div>
-         </div>
-         {/* Floating Badge */}
-         <div className="absolute bottom-2 right-2 px-2 py-1 bg-blue-600/90 text-[6px] text-white rounded font-bold shadow-lg">
-            v2.0 LIVE
          </div>
       </div>
     </div>
@@ -90,23 +86,23 @@ const items = [
   {
     id: 'flowly',
     title: 'Flowly Tech',
-    category: 'SaaS / Product',
+    description: 'SaaS / Product',
     thumbnail: <ThumbnailFlowlyTech />,
-    status: 'Available'
+    status: 'Ready'
   },
   {
     id: 'flowly-warm',
-    title: 'Flowly Lux',
-    category: 'Agency / Portfolio',
+    title: 'Flowly Warm',
+    description: 'Luxury / Agency',
     thumbnail: <ThumbnailFlowlyWarm />,
-    status: 'Available'
+    status: 'Ready'
   },
   {
     id: 'future',
-    title: 'Neo Brutalism',
-    category: 'Experimental',
+    title: 'Neo Portfolio',
+    description: 'Bento / Grid',
     thumbnail: <ThumbnailFuture />,
-    status: 'Coming Soon'
+    status: 'Locked'
   }
 ];
 
@@ -130,29 +126,18 @@ const CollectorDashboard: React.FC = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col md:flex-row md:items-end justify-between mb-24 border-b border-white/[0.08] pb-8"
+          className="mb-24 space-y-4"
         >
-           <div className="space-y-4">
-              <div className="flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-white/40">
-                <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
-                Live Gallery
-              </div>
-              <h1 className="text-5xl md:text-7xl font-medium tracking-tight text-white">
-                Interface<br/>
-                <span className="text-white/40">Collection.</span>
-              </h1>
-           </div>
-           
-           <div className="hidden md:block text-right pb-2">
-              <p className="text-sm text-white/50 leading-relaxed max-w-xs">
-                 A curated selection of high-fidelity landing page heroes. 
-                 Optimized for performance and aesthetic precision.
-              </p>
-           </div>
+           <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white">
+             Hero Designs<span className="text-white/30">.</span>
+           </h1>
+           <p className="text-lg text-white/50">
+             High-fidelity headers for inspiration.
+           </p>
         </motion.header>
 
         {/* Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
           {items.map((item, index) => (
             <motion.div
               key={item.id}
@@ -161,11 +146,11 @@ const CollectorDashboard: React.FC = () => {
               transition={{ delay: 0.2 + index * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               onMouseEnter={() => setHovered(item.id)}
               onMouseLeave={() => setHovered(null)}
-              onClick={() => item.status === 'Available' && navigate(`/template/${item.id}`)}
-              className={`group flex flex-col gap-5 ${item.status === 'Available' ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}`}
+              onClick={() => item.status === 'Ready' && navigate(`/template/${item.id}`)}
+              className={`group flex flex-col gap-6 ${item.status === 'Ready' ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}`}
             >
               {/* Thumbnail Frame */}
-              <div className="relative aspect-[16/10] w-full bg-[#0a0a0a] rounded border border-white/[0.08] overflow-hidden transition-all duration-500 group-hover:border-white/20 group-hover:shadow-[0_0_40px_-10px_rgba(255,255,255,0.05)]">
+              <div className="relative aspect-[16/10] w-full bg-[#0a0a0a] rounded-xl border border-white/[0.08] overflow-hidden transition-all duration-500 group-hover:border-white/20 group-hover:shadow-[0_0_50px_-10px_rgba(255,255,255,0.07)]">
                  {/* Inner Thumbnail Component */}
                  <div className="w-full h-full">
                     {item.thumbnail}
@@ -175,37 +160,34 @@ const CollectorDashboard: React.FC = () => {
                  <div className={`absolute inset-0 bg-black/40 transition-opacity duration-300 ${hovered === item.id ? 'opacity-0' : 'opacity-100'}`} />
                  
                  {/* Action Button */}
-                 {item.status === 'Available' && (
+                 {item.status === 'Ready' && (
                    <div className="absolute top-4 right-4 z-20">
                       <div className="w-10 h-10 bg-white text-black rounded-full flex items-center justify-center opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 shadow-xl">
-                         <ArrowUpRight size={20} strokeWidth={2} />
+                         <ArrowUpRight size={20} strokeWidth={2.5} />
                       </div>
                    </div>
                  )}
               </div>
 
               {/* Meta Info */}
-              <div className="flex justify-between items-start border-t border-white/[0.05] pt-4">
+              <div className="px-1 flex justify-between items-start">
                  <div>
-                    <h3 className="text-lg font-medium text-white group-hover:text-blue-400 transition-colors">{item.title}</h3>
-                    <span className="text-xs text-white/40 uppercase tracking-wider">{item.category}</span>
+                    <h3 className="text-xl font-bold text-white group-hover:text-white/80 transition-colors">{item.title}</h3>
+                    <p className="text-sm text-white/40 mt-1">{item.description}</p>
                  </div>
-                 <div className={`text-[10px] font-bold uppercase tracking-widest py-1 px-2 rounded border ${
-                    item.status === 'Available' 
-                    ? 'border-white/10 text-white/80 bg-white/5' 
-                    : 'border-transparent text-white/20'
-                 }`}>
-                    {item.status}
-                 </div>
+                 {item.status === 'Locked' && (
+                    <div className="text-[10px] font-bold uppercase tracking-widest py-1 px-2 rounded border border-white/5 text-white/30">
+                       Locked
+                    </div>
+                 )}
               </div>
             </motion.div>
           ))}
         </div>
 
         {/* Footer */}
-        <div className="mt-32 pt-10 border-t border-white/[0.08] flex justify-between items-center text-xs text-white/30 uppercase tracking-widest">
-           <span>Flowly Design System</span>
-           <span>v2.4.0 — 2024</span>
+        <div className="mt-40 pt-10 border-t border-white/[0.08] flex justify-between items-center text-xs text-white/30 uppercase tracking-widest">
+           <span>Flowly © 2026</span>
         </div>
 
       </div>
