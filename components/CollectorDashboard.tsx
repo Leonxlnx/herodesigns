@@ -147,6 +147,34 @@ const ThumbnailLumina = () => (
   </div>
 );
 
+const ThumbnailKinetik = () => (
+  <div className="relative w-full h-full bg-[#080808] overflow-hidden group-hover:scale-105 transition-transform duration-700">
+      {/* Vertical Lines */}
+      <div className="absolute inset-0 flex justify-between px-6 opacity-20">
+         <div className="w-px h-full bg-white" />
+         <div className="w-px h-full bg-white" />
+         <div className="w-px h-full bg-white" />
+      </div>
+      
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+         <div className="text-4xl font-black italic tracking-tighter text-white mix-blend-difference skew-x-[-10deg]">
+             UNLEASH
+         </div>
+         <div className="text-4xl font-black italic tracking-tighter text-[#D4FF00] skew-x-[-10deg] -mt-2">
+             VELOCITY
+         </div>
+      </div>
+
+      {/* Ticker Bottom */}
+      <div className="absolute bottom-0 w-full bg-[#D4FF00] h-4 flex items-center overflow-hidden">
+         <div className="flex gap-2 text-[8px] font-bold text-black whitespace-nowrap">
+             KINETIK • KINETIK • KINETIK • KINETIK • KINETIK • KINETIK
+         </div>
+      </div>
+  </div>
+);
+
 // --- MAIN COMPONENT ---
 
 const items = [
@@ -183,6 +211,13 @@ const items = [
     title: 'Lumina Interface',
     description: 'Fluid / Web3',
     thumbnail: <ThumbnailLumina />,
+    status: 'Ready'
+  },
+  {
+    id: 'kinetik',
+    title: 'Kinetik Sport',
+    description: 'Brutalist / Volt',
+    thumbnail: <ThumbnailKinetik />,
     status: 'Ready'
   }
 ];

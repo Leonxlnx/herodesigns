@@ -5,6 +5,7 @@ import FlowlyWarmHero from './components/FlowlyWarmHero';
 import NeoHero from './components/NeoHero';
 import AwwwardsJourney from './components/AwwwardsJourney';
 import LuminaHero from './components/LuminaHero';
+import KinetikHero from './components/KinetikHero';
 import CollectorDashboard from './components/CollectorDashboard';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -75,6 +76,14 @@ const AnimatedRoutes = () => {
           element={
             <PageTransition>
               <LuminaHero />
+            </PageTransition>
+          } 
+        />
+        <Route 
+          path="/template/kinetik" 
+          element={
+            <PageTransition>
+              <KinetikHero />
             </PageTransition>
           } 
         />
