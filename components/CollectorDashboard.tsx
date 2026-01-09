@@ -125,6 +125,28 @@ const ThumbnailAwwwards = () => (
    </div>
 );
 
+const ThumbnailLumina = () => (
+  <div className="relative w-full h-full bg-[#050505] overflow-hidden group-hover:scale-105 transition-transform duration-700">
+      {/* Aurora Gradients */}
+      <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-gradient-to-r from-cyan-500/20 via-blue-600/20 to-purple-600/20 blur-[60px] animate-pulse duration-1000" />
+      
+      {/* Content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
+          <div className="w-32 h-20 bg-white/[0.03] backdrop-blur-md border border-white/10 rounded-lg shadow-2xl flex flex-col p-3">
+             <div className="w-full h-full flex items-end gap-1">
+                {[40, 70, 50, 90, 60].map((h, i) => (
+                   <div key={i} className="flex-1 bg-gradient-to-t from-cyan-400 to-blue-500 rounded-t-sm" style={{ height: `${h}%` }} />
+                ))}
+             </div>
+          </div>
+          <div className="text-center">
+             <div className="w-24 h-1.5 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full mx-auto mb-1" />
+             <div className="w-16 h-1 bg-white/20 rounded-full mx-auto" />
+          </div>
+      </div>
+  </div>
+);
+
 // --- MAIN COMPONENT ---
 
 const items = [
@@ -154,6 +176,13 @@ const items = [
     title: 'Organic Motion',
     description: 'Awwwards / Editorial',
     thumbnail: <ThumbnailAwwwards />,
+    status: 'Ready'
+  },
+  {
+    id: 'lumina',
+    title: 'Lumina Interface',
+    description: 'Fluid / Web3',
+    thumbnail: <ThumbnailLumina />,
     status: 'Ready'
   }
 ];
