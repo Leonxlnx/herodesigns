@@ -26,7 +26,7 @@ const NeoHero: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-[#09090b] text-white p-4 md:p-8 font-sans selection:bg-purple-500/30">
+    <div className="relative w-full h-screen bg-[#09090b] text-white p-4 md:p-8 font-sans selection:bg-purple-500/30 overflow-hidden flex flex-col">
       
       {/* Back Button */}
       <motion.button 
@@ -34,21 +34,21 @@ const NeoHero: React.FC = () => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.5 }}
         onClick={() => navigate('/')}
-        className="fixed top-8 left-8 z-50 flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 border border-white/10 backdrop-blur-md text-white/50 hover:text-white hover:border-white/30 transition-all cursor-pointer"
+        className="absolute top-8 left-8 z-50 flex items-center gap-2 px-4 py-2 rounded-full bg-black/50 border border-white/10 backdrop-blur-md text-white/50 hover:text-white hover:border-white/30 transition-all cursor-pointer"
       >
         <ArrowLeft size={14} />
         <span className="text-xs font-medium uppercase tracking-wider">Back</span>
       </motion.button>
 
-      <div className="max-w-7xl mx-auto pt-16 md:pt-12 pb-12">
+      <div className="max-w-7xl w-full mx-auto flex-1 flex flex-col justify-center pt-16 md:pt-0">
         {/* Header */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 lg:mb-12 gap-6">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl md:text-8xl font-bold tracking-tighter leading-[0.9]">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.9]">
               DIGITAL <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">ARCHITECT</span>
             </h1>
@@ -66,8 +66,8 @@ const NeoHero: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:grid-rows-3 h-auto md:h-[800px]">
+        {/* Bento Grid - Fit to remaining height */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:grid-rows-3 flex-1 max-h-[60vh] lg:max-h-[700px]">
           
           {/* 1. Large Feature Card (Profile/Intro) */}
           <BentoCard className="md:col-span-2 md:row-span-2 relative !p-0">
