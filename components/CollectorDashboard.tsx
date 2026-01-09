@@ -99,6 +99,32 @@ const ThumbnailNeo = () => (
    </div>
 );
 
+const ThumbnailAwwwards = () => (
+   <div className="relative w-full h-full bg-[#FDFCF8] flex items-center justify-center group-hover:scale-105 transition-transform duration-700 overflow-hidden">
+      <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.1]" />
+      
+      {/* Typography Composition */}
+      <div className="relative z-10 flex flex-col items-center">
+         <div className="text-[#1A1A1A] text-4xl font-bold tracking-tighter leading-none mix-blend-multiply">
+            DIGITAL
+         </div>
+         <div className="text-[#1A1A1A] text-4xl font-bold tracking-tighter leading-none mix-blend-multiply italic opacity-50">
+            ALCHEMY
+         </div>
+      </div>
+
+      {/* Rotating Badge */}
+      <div className="absolute bottom-4 right-4 w-12 h-12 rounded-full border border-[#1A1A1A] flex items-center justify-center animate-[spin_8s_linear_infinite]">
+         <div className="w-1 h-1 bg-[#1A1A1A] rounded-full" />
+      </div>
+
+      {/* Marquee Strips */}
+      <div className="absolute top-4 -left-4 bg-[#1A1A1A] text-[#FDFCF8] text-[8px] px-2 py-0.5 transform -rotate-3 w-[120%] whitespace-nowrap overflow-hidden">
+         MOTION • DESIGN • STRATEGY • MOTION • DESIGN • STRATEGY
+      </div>
+   </div>
+);
+
 // --- MAIN COMPONENT ---
 
 const items = [
@@ -121,6 +147,13 @@ const items = [
     title: 'Neo Portfolio',
     description: 'Bento / Grid',
     thumbnail: <ThumbnailNeo />,
+    status: 'Ready'
+  },
+  {
+    id: 'awwwards',
+    title: 'Organic Motion',
+    description: 'Awwwards / Editorial',
+    thumbnail: <ThumbnailAwwwards />,
     status: 'Ready'
   }
 ];
